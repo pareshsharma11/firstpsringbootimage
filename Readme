@@ -15,7 +15,7 @@ cd firstpsringbootimage
 Step 3: Setup mongo
 ====================
 docker pull mongo
-docker container run -itd --name mongocontainer -= 86:27017 mongo:latest
+docker container run -itd --name mongocontainer -p 86:27017 mongo:latest
 
 Step 4: login to container and setup the database
 =================================================
