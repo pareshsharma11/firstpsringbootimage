@@ -1,0 +1,48 @@
+Read me
+=========
+
+Step 1:
+=========
+mkdir /var/tmp/firstspringboot
+cd /var/tmp/firstspringboot
+
+Step 2: clone git repo
+======================
+git clone https://github.com/pareshsharma11/firstpsringbootimage.git
+
+cd firstpsringbootimage
+
+Step 3: Setup mongo
+====================
+docker pull mongo
+docker container run -itd --name mongocontainer -= 86:27017 mongo:latest
+
+Step 4: login to container and setup the database
+=================================================
+docker container exec -it mongocontainer bash
+mongo 
+use productreviews
+
+Step 5: build firstpsringbootimage and run the container
+=========================================================
+
+docker image build -f Dockerfile -t firstpsringbootimage:v1 .
+
+docker container run -itd --name=firstspringboot -p 84:8078 firstpsringbootimage:v1
+
+
+step 6: open firewall rule for port 86(mongo) and port 84(springbootapp) 
+=======================================
+googleconsole -> vpc network -> create firewall rule
+
+Step 7: Try to hit your service with postman or browser
+========================================================
+machine-public-ip:84/rest1/reviews
+
+Step 8: try different methods with postman get/post/delete etc
+-------------------------------------------------------------------
+
+Enjoy your new learning!!!
+
+
+Contributor: Paresh Sharma
