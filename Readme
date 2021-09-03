@@ -1,7 +1,7 @@
 Read me
 =========
 
-Step 1:
+Step 1: create the directory to clone the git repo
 =========
 mkdir /var/tmp/firstspringboot
 cd /var/tmp/firstspringboot
