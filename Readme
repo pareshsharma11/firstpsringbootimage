@@ -15,9 +15,16 @@ cd firstpsringbootimage
 Step 3: Setup mongo
 ====================
 docker pull mongo
-docker container run -itd --name mongocontainer -p 86:27017 mongo:latest
 
-Step 4: login to container and setup the database
+Step 4: Create bridge between containers to interact
+----------------------------------------------------
+docker network create springmongo-net
+
+Step 5: execute the mongocontainer to run it over net created in step 4 , 
+=========================================================================
+docker container run --rm --net springmongo-net -itd --name mongocontainer mongo:latest
+
+Step 6: login to container and setup the database
 =================================================
 docker container exec -it mongocontainer bash
 mongo 
@@ -25,12 +32,12 @@ use productreviews
 exit
 exit
 
-Step 5: build firstpsringbootimage and run the container
-=========================================================
+Step 7: build firstpsringbootimage and run the container over the same network bridge created in step 4
+=======================================================================================================
 
 docker image build -f Dockerfile -t firstpsringbootimage:v1 .
 
-docker container run -itd --name=firstspringboot -p 84:8078 firstpsringbootimage:v1
+docker container run --rm --net springmongo-net -itd --name firstspringboot -p 84:8078 firstpsringbootimage:v1
 
 
 step 6: open firewall rule for port 86(mongo) and port 84(springbootapp) 
